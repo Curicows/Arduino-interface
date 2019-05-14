@@ -211,12 +211,14 @@ void loop()
   if (IA == 1)
   {
     if (TM == 1)
+    {
     tempMenu1();
-  }
-  else if (TM == 2)
-  {
+    }
+    else if (TM == 2)
+    {
     tempMenu2();
-  }
+    }
+  }  
   if (MA == 2)
   {
     menu2();
