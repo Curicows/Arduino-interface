@@ -21,6 +21,7 @@ decode_results results;
 DHT dht(DHTPIN, DHTTYPE);
 virtuabotixRTC myRTC(6, 7, 8);
 
+// Variables
 short LEITURASERIAL;
 int MA = 0; //Menu atual
 int IA = 0; //Interface atual
