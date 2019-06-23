@@ -25,7 +25,7 @@ virtuabotixRTC myRTC(6, 7, 8);
 short LEITURASERIAL;
 int MA = 0; //Menu atual
 int IA = 0; //Interface atual
-int MT = 5; //Menu total
+int MT = 6; //Menu total
 int RM; //Reles Menu
 int CM = 1; //Config menu
 int TM = 1; //Temperatura menu
@@ -99,6 +99,7 @@ String TTP2; //Time to print 2
 String C1 = "ON"; //Config 1 LCD backlight
 boolean SI = false; //Senha inserida
 boolean TC = false; //Time config boolean
+boolean LIL = false; //Luz interna boolean
 const int ledAzul = 8;
 const int ledVerde = 9;
 const int ledVermelho = 10;
@@ -128,6 +129,7 @@ void setup()
   pinMode(13,OUTPUT);  
   digitalWrite(13,HIGH);
   digitalWrite(12,HIGH);
+//  digitalWrite(5,HIGH);
 //  leituraEEPROMSenha();
   irrecv.enableIRIn();
   Serial.begin(9600);
@@ -581,6 +583,11 @@ void right()
       lcdClear();
       menu5();
     }
+    else if (MA == 6)
+    {
+      lcdClear();
+      menu6();
+    }
   }
  }
 }
@@ -642,6 +649,11 @@ void left()
     {
       lcdClear();
       menu4();
+    }
+    else if (MA == 5)
+    {
+      lcdClear();
+      menu5();
     }
   }
  }
@@ -765,6 +777,19 @@ void down()
       IA = 4;
       config1();
     }
+    else if (MA == 6)
+    {
+      if (LIL == false)
+      {
+        digitalWrite(5,HIGH);
+        LIL = true;
+      }
+      else
+      {
+        digitalWrite(5,LOW);
+        LIL = false;
+      }
+    }
   }
 }
 
@@ -852,6 +877,19 @@ void ok()
       IA = 4;
       config1();
     }
+    else if (MA == 6)
+    {
+      if (LIL == false)
+      {
+        digitalWrite(5,HIGH);
+        LIL = true;
+      }
+      else
+      {
+        digitalWrite(5,LOW);
+        LIL = false;
+      }
+    }
   }
 }
 
@@ -899,6 +937,15 @@ void menu5()
   lcd.print(TTP1);
   lcd.setCursor(0,1);
   lcd.print(TTP2);
+}
+
+void menu6()
+{
+  MA = 6;
+  lcd.setCursor(0,0);
+  lcd.print("Lighting");
+  lcd.setCursor(0,1);
+  lcd.print("");
 }
 
 void lcdClear()
